@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Great Number Game!</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Welcome to the Great Number Game!</h1>
+        <div id="content_layer">
+            <h2>I am thinking of a number between 1 and 100.</h2>
+            <p>Take a guess! The lower the score the better.</p>
+            <p>Score: <%= count %></p>
+            <div id="resultsLayer" style="background-color: <%= color %>; border-color: <%= border %>">
+                <% if(guess == "none"){ %>
+                    <p></p>
+                <% }else if(parseInt(randomNum) > parseInt(guess)){ %>
+                    <p>Too Low!</p>
+                <% }else if(parseInt(randomNum) < parseInt(guess)){ %>
+                    <p>Too High!</p>
+                <% }else if(parseInt(randomNum) == parseInt(guess)){ %>
+                    <p><%= parseInt(randomNum) %> was the number!</p>
+                <% } %>
+            </div>
+            <% if(parseInt(randomNum) == parseInt(guess)){ %>
+                <form action="/reset" method="post">
+                    <input type="submit" value="Play Again" autofocus>
+                </form>
+            <% }else{ %>
+                <form action="/guess" method="post" autocomplete="off">
+                    <input type="text" name="answer" tabindex="0" placeholder="Enter Guess" autocomplete="off" autofocus />
+                    <input type="submit" value="Guess" />
+                </form>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
